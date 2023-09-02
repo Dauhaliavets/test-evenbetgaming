@@ -37,10 +37,10 @@ export const App = () => {
       width: secondBoxWidth,
     } = secondBoxRef.current.getBoundingClientRect();
 
-    const startX = firstBoxLeft + ballSize - ballSize / 2 - firstBoxWidth;
-    const startY = firstBoxTop + ballSize - ballSize / 2 - firstBoxHeight;
-    const endX = secondBoxLeft + ballSize - ballSize / 2 - secondBoxWidth;
-    const endY = secondBoxTop + ballSize - ballSize / 2 - secondBoxHeight;
+    const startX = firstBoxLeft + ballSize / 2 - firstBoxWidth;
+    const startY = firstBoxTop + ballSize / 2 - firstBoxHeight;
+    const endX = secondBoxLeft + ballSize / 2 - secondBoxWidth;
+    const endY = secondBoxTop + ballSize / 2 - secondBoxHeight;
 
     const newCoords = {
       startX,
