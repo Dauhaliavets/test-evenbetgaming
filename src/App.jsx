@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Ball } from "./components/Ball/Ball";
 import { Box } from "./components/Box/Box";
@@ -22,9 +22,7 @@ export const App = () => {
   const firstBoxRef = useRef(null);
   const secondBoxRef = useRef(null);
 
-  const handleStart = () => {
-    setIsAnimate(true);
-
+  const getNewCoords = () => {
     const {
       top: firstBoxTop,
       left: firstBoxLeft,
@@ -51,8 +49,25 @@ export const App = () => {
       endY,
     };
 
-    setBollCoords(newCoords);
+    return newCoords;
   };
+
+  const handleStart = () => {
+    setIsAnimate(true);
+    updateCoords();
+  };
+
+  const updateCoords = useCallback(() => {
+    const newCoords = getNewCoords();
+    setBollCoords(newCoords);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateCoords);
+    return () => {
+      window.removeEventListener("resize", updateCoords);
+    };
+  }, [updateCoords]);
 
   return (
     <div className="app">
